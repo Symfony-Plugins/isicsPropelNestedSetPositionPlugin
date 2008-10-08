@@ -1,0 +1,70 @@
+= isicsPropelNestedSetPosition plugin =
+
+This plugins adds a widget and a valitor for easily handle your Propel nested set objects position.
+
+== Installation ==
+
+  * Requirements:
+    * sfPropelPlugin (Propel 1.3): native nested set support
+
+  * Install the plugin
+
+    {{{
+      symfony plugin-install http://plugins.symfony-project.com/isicsPropelNestedSetPositionPlugin
+    }}}
+    
+  * Clear the cache
+
+    {{{
+      symfony cache:clear
+    }}}
+    
+    
+== Usage ==
+
+  In your sfFormPropel class:
+
+  * use the widget isicsWigetFormPropelNestedSetPosition:
+    
+    {{{
+      $this->setWidgets(array(
+        'position' => new isicsWigetFormPropelNestedSetPosition(array('node' => $this->object))
+      ));
+    }}}
+    
+  * use the validator isicsValidatorPropelNestedSetPosition:
+  
+    {{{
+      $this->setValidators(array(
+        'position' => new isicsValidatorPropelNestedSetPosition(array('node' => $this->object, 'max_depth' => 3))
+      ));
+    }}}
+    
+    max_depth option is optionnal.
+    
+  * customize the doSave() method:
+  
+    {{{
+      public function doSave($con = null)
+      {
+        if (!is_null($position = $this->getValue('position')))
+        {
+          $this->object->$position['method']($position['related_node']);
+        }
+    
+        parent::doSave($con);
+      }
+    }}}
+    
+  * I18N: by default, methods translations have to be in "messages" catalogue.
+    You can specify any catalogue in app.yml:
+    
+    {{{
+      isics_widget_form_propel_nested_set_position:
+        i18n_catalogue: my_catalogue
+    }}}
+
+== ROADMAP ==
+
+  * Write unit tests
+  
