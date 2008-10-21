@@ -63,6 +63,18 @@ This plugins adds a widget and a valitor for easily handle your Propel nested se
       isics_widget_form_propel_nested_set_position:
         i18n_catalogue: my_catalogue
     }}}
+    
+  * By default, a new node is added as last child of root. You're also able to define another default method and related node:
+  
+    {{{
+      $this->setWidgets(array(
+        'position' => new isicsWigetFormPropelNestedSetPosition(array(
+          'node'                 => $this->object,
+          'default_method'       => 'insertAsFirstChildOf',
+          'default_related_node' => my_parent_node->getId()
+        ))
+      ));
+    }}}    
 
 == ROADMAP ==
 
