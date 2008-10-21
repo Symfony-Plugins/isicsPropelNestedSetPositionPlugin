@@ -71,7 +71,7 @@ This plugins adds a widget and a valitor for easily handle your Propel nested se
         'position' => new isicsWigetFormPropelNestedSetPosition(array(
           'node'                 => $this->object,
           'default_method'       => 'insertAsFirstChildOf',
-          'default_related_node' => my_parent_node->getId()
+          'default_related_node' => $my_parent_node->getId()
         ))
       ));
     }}}    
