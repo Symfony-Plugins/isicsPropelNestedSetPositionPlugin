@@ -75,6 +75,7 @@
    <license>MIT</license>
    <notes>
      * Added options `default_method` and `default_related_node` to widget
+     * Updated README (usage)     
      * Fixed widget: usage of getPrimaryKey() instead of getId()
    </notes>
   </release>    
