@@ -21,14 +21,18 @@ class isicsWidgetFormPropelNestedSetPosition extends sfWidgetForm
    *
    * Available options:
    *
-   *  * node:       The nested set object (required)
-   *  * connection: The Propel connection to use (null by default)
+   *  * node:                 The nested set object (required)
+   *  * default_method:       The default method (`insertAsLastChildOf` by default)
+   *  * default_related_node: The defaut related node (null by default)
+   *  * connection:           The Propel connection to use (null by default)
    *
    * @see sfWidgetFormSelect
    **/  
   protected function configure($options = array(), $attributes = array())
   {
     $this->addRequiredOption('node');
+    $this->addOption('default_method', 'insertAsLastChildOf');
+    $this->addOption('default_related_node', null);
     $this->addOption('connection', null);
   }
 
@@ -129,8 +133,8 @@ class isicsWidgetFormPropelNestedSetPosition extends sfWidgetForm
 	      if ($node->isNew())
 	      {
 	        $value = array(
-	          'method'       => 'insertAsLastChildOf',
-	          'related_node' => null
+	          'method'       => $this->getOption('default_method'),
+	          'related_node' => $this->getOption('default_related_node')
 	        );
 	      }      
 	      else
