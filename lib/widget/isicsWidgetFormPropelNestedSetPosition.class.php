@@ -128,7 +128,10 @@ class isicsWidgetFormPropelNestedSetPosition extends sfWidgetForm
 	    {    
 	      if ($node->isNew())
 	      {
-	        $value = array('method' => 'insertAsLastChildOf', 'related_node' => null);
+	        $value = array(
+	          'method'       => 'insertAsLastChildOf',
+	          'related_node' => null
+	        );
 	      }      
 	      else
 	      {
@@ -138,18 +141,18 @@ class isicsWidgetFormPropelNestedSetPosition extends sfWidgetForm
 	          if ($node->hasNextSibling())
 	          {
 	            $value['method']       = 'moveToNextSiblingOf';
-	            $value['related_node'] = $node->retrievePrevSibling()->getId();
+	            $value['related_node'] = $node->retrievePrevSibling()->getPrimaryKey();
 	          }
 	          else
 	          {
 	            $value['method']       = 'moveToLastChildOf';
-	            $value['related_node'] = $node->retrieveParent()->getId();
+	            $value['related_node'] = $node->retrieveParent()->getPrimaryKey();
 	          }
 	        }
 	        else
 	        {
 	          $value['method']       = 'moveToFirstChildOf';
-	          $value['related_node'] = $node->retrieveParent()->getId();
+	          $value['related_node'] = $node->retrieveParent()->getPrimaryKey();
 	        }        
 	      } 
 	    }
