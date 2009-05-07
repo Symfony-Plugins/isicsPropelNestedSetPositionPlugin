@@ -46,10 +46,17 @@ This plugins adds a widget and a valitor for easily handle your Propel nested se
   
     {{{
       public function doSave($con = null)
-      {
+      { 
         if (!is_null($position = $this->getValue('position')))
         {
-          $this->object->$position['method']($position['related_node']);
+          if (isset($position['related_node']))
+          {
+            $this->object->$position['method']($position['related_node']);
+          }
+          else
+          {
+            $this->object->$position['method']();
+          }
         }
     
         parent::doSave($con);
